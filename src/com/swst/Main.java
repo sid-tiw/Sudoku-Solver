@@ -41,9 +41,12 @@ public class Main {
                 for (int j = 0; j < n; j++)
                     matrix[i][j] = Integer.parseInt(arr[n * i + j].getText());
             try {
+                if(Solve.checkForZeroes(matrix, n).size() == 0 && !Solve.checkValidity(matrix, n)){
+                    JOptionPane.showMessageDialog(mainActivity, "You Entered an unsolvable Sudoku!!!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 Solve.solve(matrix, n);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                JOptionPane.showMessageDialog(mainActivity, "You Entered an unsolvable Sudoku!!!", "Error", JOptionPane.ERROR_MESSAGE);
             }
             for (int i = 0; i < n; i++)
                 for (int j = 0; j < n; j++)
