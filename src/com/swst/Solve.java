@@ -24,6 +24,7 @@ class Solve {
                     copy(matrix, tempMatrix, n);
                     return true;
                 }
+                throw new Exception("Not Solvable!!");
             }
         }
         return checkValidity(matrix, n);
