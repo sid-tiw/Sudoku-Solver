@@ -3,8 +3,9 @@ package com.swst;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.lang.Math;
+import com.swst.*;
 
-class Solve {
+public class Solve{
 
     static boolean solve(int[][] matrix, int n) throws Exception {
         PairSelf minPos = minPoss(matrix, n);

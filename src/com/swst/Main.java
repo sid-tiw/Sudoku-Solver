@@ -4,6 +4,7 @@ package com.swst;
 
 import javax.swing.*;
 import java.awt.*;
+import com.swst.*;
 
 public class Main {
 

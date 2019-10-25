@@ -1,6 +1,6 @@
 package com.swst;
 
-class Fonts {
+public class Fonts {
     String[] s;
 
     Fonts() {
