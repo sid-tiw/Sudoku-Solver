@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_sudokusolver" default="compile.module.sudokusolver">
+  <dirname property="module.sudokusolver.basedir" file="${ant.file.module_sudokusolver}"/>
+  
+  <property name="module.jdk.home.sudokusolver" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.sudokusolver" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.sudokusolver" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.sudokusolver" value="-encoding UTF-8 -source 12 -target 12 ${compiler.args}"/>
+  
+  <property name="sudokusolver.output.dir" value="${module.sudokusolver.basedir}/out/production/SudokuSolver"/>
+  <property name="sudokusolver.testoutput.dir" value="${module.sudokusolver.basedir}/out/test/SudokuSolver"/>
+  
+  <path id="sudokusolver.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="sudokusolver.module.production.classpath">
+    <path refid="${module.jdk.classpath.sudokusolver}"/>
+  </path>
+  
+  <path id="sudokusolver.runtime.production.module.classpath">
+    <pathelement location="${sudokusolver.output.dir}"/>
+  </path>
+  
+  <path id="sudokusolver.module.classpath">
+    <path refid="${module.jdk.classpath.sudokusolver}"/>
+    <pathelement location="${sudokusolver.output.dir}"/>
+  </path>
+  
+  <path id="sudokusolver.runtime.module.classpath">
+    <pathelement location="${sudokusolver.testoutput.dir}"/>
+    <pathelement location="${sudokusolver.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.sudokusolver">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.sudokusolver">
+    <patternset refid="excluded.from.module.sudokusolver"/>
+  </patternset>
+  
+  <path id="sudokusolver.module.sourcepath">
+    <dirset dir="${module.sudokusolver.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.sudokusolver" depends="compile.module.sudokusolver.production,compile.module.sudokusolver.tests" description="Compile module SudokuSolver"/>
+  
+  <target name="compile.module.sudokusolver.production" depends="register.custom.compilers" description="Compile module SudokuSolver; production classes">
+    <mkdir dir="${sudokusolver.output.dir}"/>
+    <javac2 destdir="${sudokusolver.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.sudokusolver}/javac">
+      <compilerarg line="${compiler.args.sudokusolver}"/>
+      <bootclasspath refid="sudokusolver.module.bootclasspath"/>
+      <classpath refid="sudokusolver.module.production.classpath"/>
+      <src refid="sudokusolver.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.sudokusolver"/>
+    </javac2>
+    
+    <copy todir="${sudokusolver.output.dir}">
+      <fileset dir="${module.sudokusolver.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.sudokusolver.tests" depends="register.custom.compilers,compile.module.sudokusolver.production" description="compile module SudokuSolver; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.sudokusolver" description="cleanup module">
+    <delete dir="${sudokusolver.output.dir}"/>
+    <delete dir="${sudokusolver.testoutput.dir}"/>
+  </target>
+</project>
