@@ -1,2 +1,9 @@
   language: java
   install: skip
+  deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: 3c75d149416a7a32aef21f1e704e48944a2232c1  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  on:
+    branch: master
